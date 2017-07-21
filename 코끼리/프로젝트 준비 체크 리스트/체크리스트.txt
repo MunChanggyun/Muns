@@ -1,0 +1,56 @@
+1. Luna eclipse - 바탕화면 - Team5
+2. File - import - properties - web project setting - rename
+3. window - properties - Server Runtime Environoment
+4. apache tomcat 7.0 설정
+5. css, html, jsp  - utf 8 
+6. console - servers - finish - server.xml 생김 - 65line - port: 8090 변경
+7. jsp 파일을 사용하기 위해서 html4 형식 -> html5
+8. Web-INF - lib - 
+cos : 파일업로드시 필요한 파일
+javax.servlet.jsp.jstl
+javax.servlet.jsp.jstl-api : jstl 라이브러리
+json : json 라이브러리
+ojdbc6 : jdbc 라이브러리
+9. 프로젝트 우클릭 propertiest - configure - tern
+(jquery가 다운받아져있다는 전제하에 help - market place - tern 검색 - plugin)
+10. 프로젝트 우클릭 propertiest - jquery and tern 클릭 ecma6 선택 후 체크
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ - jstl
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+URL 방식으로 
+1. DB서버 만들기
+system 더블클릭 - 다른사용자 우클릭 - 사용자 생성 
+-- USER SQL
+CREATE USER Team5 IDENTIFIED BY 1004
+DEFAULT TABLESPACE "USERS"
+TEMPORARY TABLESPACE "TEMP";
+-- QUOTAS
+ALTER USER Team5 QUOTA UNLIMITED ON USERS;
+-- ROLES
+GRANT "CONNECT" TO Team5 ;
+GRANT "RESOURCE" TO Team5 ;
+-- SYSTEM PRIVILEGES
+2. Connect pool
+3. Filter 한글처리
+1. eXERD 확인하기.
+2. Dao method 넣기
+3. Dao method 배분하기
+
+사용tool
+개발환경 : eclipse
+Database : Oracle sqldeveloper
+WAS : Tomcat
+eXERD :table
+visual paradaigm :uml
+cacao oven :스토리보드
+
+주석 한글 처리
+서버 한글 처리
+
+
+
+
+
+

@@ -1,0 +1,619 @@
+/* 새 테이블 */
+CREATE TABLE TABLE (
+);
+
+COMMENT ON TABLE TABLE IS '새 테이블';
+
+/* Member */
+CREATE TABLE Member (
+	Member_id VARCHAR2(20) NOT NULL, /* 회원ID */
+	Member_pw VARCHAR2(20) NOT NULL, /* 회원PW */
+	Member_Authority NUMBER NOT NULL, /* 권한 */
+	Member_zipcode VARCHAR2(20) NOT NULL, /* 우편번호 */
+	Member_dong VARCHAR2(20) NOT NULL, /* 동 */
+	Member_ho VARCHAR2(20) NOT NULL /* 호수 */
+);
+
+COMMENT ON TABLE Member IS 'Member';
+
+COMMENT ON COLUMN Member.Member_id IS '회원ID';
+
+COMMENT ON COLUMN Member.Member_pw IS '회원PW';
+
+COMMENT ON COLUMN Member.Member_Authority IS '권한';
+
+COMMENT ON COLUMN Member.Member_zipcode IS '우편번호';
+
+COMMENT ON COLUMN Member.Member_dong IS '동';
+
+COMMENT ON COLUMN Member.Member_ho IS '호수';
+
+CREATE UNIQUE INDEX PK_Member
+	ON Member (
+		Member_id ASC
+	);
+
+ALTER TABLE Member
+	ADD
+		CONSTRAINT PK_Member
+		PRIMARY KEY (
+			Member_id
+		);
+
+/* Join */
+CREATE TABLE Join (
+	J_id VARCHAR2(20) NOT NULL, /* 회원ID */
+	J_pw VARCHAR2(20) NOT NULL, /* 회원PW */
+	J_zipcode VARCHAR2(20) NOT NULL, /* 우편번호 */
+	J_dong VARCHAR2(20), /* 동 */
+	J-ho VARCHAR2(20) /* 호수 */
+);
+
+COMMENT ON TABLE Join IS 'Join';
+
+COMMENT ON COLUMN Join.J_id IS '회원ID';
+
+COMMENT ON COLUMN Join.J_pw IS '회원PW';
+
+COMMENT ON COLUMN Join.J_zipcode IS '우편번호';
+
+COMMENT ON COLUMN Join.J_dong IS '동';
+
+COMMENT ON COLUMN Join.J-ho IS '호수';
+
+/* 게시판 관리 */
+CREATE TABLE Board_category (
+	BoardCategory_code NUMBER NOT NULL, /* 게시판 코드 */
+	BoardCategory_name VARCHAR2(50) NOT NULL /* 게시판 이름 */
+);
+
+COMMENT ON TABLE Board_category IS '게시판 관리';
+
+COMMENT ON COLUMN Board_category.BoardCategory_code IS '게시판 코드';
+
+COMMENT ON COLUMN Board_category.BoardCategory_name IS '게시판 이름';
+
+CREATE UNIQUE INDEX PK_Board_category
+	ON Board_category (
+		BoardCategory_code ASC
+	);
+
+ALTER TABLE Board_category
+	ADD
+		CONSTRAINT PK_Board_category
+		PRIMARY KEY (
+			BoardCategory_code
+		);
+
+/* 메뉴 관리 */
+CREATE TABLE TABLE5 (
+	COL <지정 되지 않음>, /* 메뉴 이름 */
+	COL2 <지정 되지 않음> /* 메뉴 설명 */
+);
+
+COMMENT ON TABLE TABLE5 IS '메뉴 관리';
+
+COMMENT ON COLUMN TABLE5.COL IS '메뉴 이름';
+
+COMMENT ON COLUMN TABLE5.COL2 IS '메뉴 설명';
+
+/* 게시판 */
+CREATE TABLE Board (
+	Board_id NUMBER NOT NULL, /* 게시글 번호 */
+	BoardCategory_code NUMBER NOT NULL, /* 게시판 코드 */
+	Member_id VARCHAR2(20) NOT NULL, /* 회원ID */
+	Board_title VARCHAR2(50), /* 게시글 제목 */
+	Board_content VARCHAR2(2000), /* 게시글 내용 */
+	Board_date DATE, /* 등록일자 */
+	Board_like NUMBER, /* 글 추천수 */
+	Board_hit NUMBER, /* 글 조회수 */
+	Ref NUMBER, /* Ref */
+	Depth NUMBER, /* Depth */
+	Step NUMBER /* Step */
+);
+
+COMMENT ON TABLE Board IS '게시판';
+
+COMMENT ON COLUMN Board.Board_id IS '게시글 번호';
+
+COMMENT ON COLUMN Board.BoardCategory_code IS '게시판 코드';
+
+COMMENT ON COLUMN Board.Member_id IS '회원ID';
+
+COMMENT ON COLUMN Board.Board_title IS '게시글 제목';
+
+COMMENT ON COLUMN Board.Board_content IS '게시글 내용';
+
+COMMENT ON COLUMN Board.Board_date IS '등록일자';
+
+COMMENT ON COLUMN Board.Board_like IS '글 추천수';
+
+COMMENT ON COLUMN Board.Board_hit IS '글 조회수';
+
+COMMENT ON COLUMN Board.Ref IS 'Ref';
+
+COMMENT ON COLUMN Board.Depth IS 'Depth';
+
+COMMENT ON COLUMN Board.Step IS 'Step';
+
+CREATE UNIQUE INDEX PK_Board
+	ON Board (
+		Board_id ASC
+	);
+
+ALTER TABLE Board
+	ADD
+		CONSTRAINT PK_Board
+		PRIMARY KEY (
+			Board_id
+		);
+
+/* 게시판 첨부 테이블 */
+CREATE TABLE Board_file (
+	Board_id NUMBER NOT NULL, /* 게시글 번호 */
+	Boardfile VARCHAR2(50) /* 게시판 파일 */
+);
+
+COMMENT ON TABLE Board_file IS '게시판 첨부 테이블';
+
+COMMENT ON COLUMN Board_file.Board_id IS '게시글 번호';
+
+COMMENT ON COLUMN Board_file.Boardfile IS '게시판 파일';
+
+/* 답글 */
+CREATE TABLE TABLE8 (
+	COL NUMBER NOT NULL, /* 답글 번호 */
+	COL2 DATE, /* 등록날짜 */
+	COL4 <지정 되지 않음>, /* 코멘트 내용 */
+	Board_id NUMBER, /* 게시글 번호 */
+	Member_id VARCHAR2(20) NOT NULL /* 회원ID */
+);
+
+COMMENT ON TABLE TABLE8 IS '답글';
+
+COMMENT ON COLUMN TABLE8.COL IS '답글 번호';
+
+COMMENT ON COLUMN TABLE8.COL2 IS '등록날짜';
+
+COMMENT ON COLUMN TABLE8.COL4 IS '코멘트 내용';
+
+COMMENT ON COLUMN TABLE8.Board_id IS '게시글 번호';
+
+COMMENT ON COLUMN TABLE8.Member_id IS '회원ID';
+
+CREATE UNIQUE INDEX PK_TABLE8
+	ON TABLE8 (
+		COL ASC
+	);
+
+ALTER TABLE TABLE8
+	ADD
+		CONSTRAINT PK_TABLE8
+		PRIMARY KEY (
+			COL
+		);
+
+/* 댓글 */
+CREATE TABLE Comments (
+	Comment_id NUMBER NOT NULL, /* 댓글글번호 */
+	Board_id NUMBER NOT NULL, /* 게시글 번호 */
+	Member_id VARCHAR2(20) NOT NULL, /* 회원ID */
+	Comment_date DATE NOT NULL /* 등록일자 */
+);
+
+COMMENT ON TABLE Comments IS '댓글';
+
+COMMENT ON COLUMN Comments.Comment_id IS '댓글글번호';
+
+COMMENT ON COLUMN Comments.Board_id IS '게시글 번호';
+
+COMMENT ON COLUMN Comments.Member_id IS '회원ID';
+
+COMMENT ON COLUMN Comments.Comment_date IS '등록일자';
+
+CREATE UNIQUE INDEX PK_Comments
+	ON Comments (
+		Comment_id ASC
+	);
+
+ALTER TABLE Comments
+	ADD
+		CONSTRAINT PK_Comments
+		PRIMARY KEY (
+			Comment_id
+		);
+
+/* 공지사항 관리 */
+CREATE TABLE TABLE10 (
+	COL NUMBER NOT NULL, /* 공지사항 테이블 ID */
+	COL2 <지정 되지 않음>, /* 공지사항  */
+	COL3 <지정 되지 않음>, /* 공지사항 테이블 생성된 날짜 */
+	COL4 <지정 되지 않음> /* 공지사항 테이블 활성화 여부 */
+);
+
+COMMENT ON TABLE TABLE10 IS '공지사항 관리';
+
+COMMENT ON COLUMN TABLE10.COL IS '공지사항 테이블 ID';
+
+COMMENT ON COLUMN TABLE10.COL2 IS '공지사항 ';
+
+COMMENT ON COLUMN TABLE10.COL3 IS '공지사항 테이블 생성된 날짜';
+
+COMMENT ON COLUMN TABLE10.COL4 IS '공지사항 테이블 활성화 여부';
+
+CREATE UNIQUE INDEX PK_TABLE10
+	ON TABLE10 (
+		COL ASC
+	);
+
+ALTER TABLE TABLE10
+	ADD
+		CONSTRAINT PK_TABLE10
+		PRIMARY KEY (
+			COL
+		);
+
+/* 공지사항  */
+CREATE TABLE TABLE11 (
+	COL NUMBER NOT NULL, /* 공지사항 ID */
+	COL2 NUMBER, /* 공지사항 테이블 ID */
+	COL4 <지정 되지 않음>, /* 공지사항 내용 */
+	COL5 NUMBER /* 공지사항 조회수 */
+);
+
+COMMENT ON TABLE TABLE11 IS '공지사항 ';
+
+COMMENT ON COLUMN TABLE11.COL IS '공지사항 ID';
+
+COMMENT ON COLUMN TABLE11.COL2 IS '공지사항 테이블 ID';
+
+COMMENT ON COLUMN TABLE11.COL4 IS '공지사항 내용';
+
+COMMENT ON COLUMN TABLE11.COL5 IS '공지사항 조회수';
+
+CREATE UNIQUE INDEX PK_TABLE11
+	ON TABLE11 (
+		COL ASC
+	);
+
+ALTER TABLE TABLE11
+	ADD
+		CONSTRAINT PK_TABLE11
+		PRIMARY KEY (
+			COL
+		);
+
+/* 일정 */
+CREATE TABLE Calendar (
+	Manager_id VARCHAR2(20) NOT NULL, /* 관리자 ID */
+	Calendar_content VARCHAR2(2000) NOT NULL, /* 일정 내용 */
+	Calendar_start VARCHAR2(20), /* 일정 시작 일시 */
+	Calendar_end VARCHAR2(20) /* 일정 종료 일시 */
+);
+
+COMMENT ON TABLE Calendar IS '일정';
+
+COMMENT ON COLUMN Calendar.Manager_id IS '관리자 ID';
+
+COMMENT ON COLUMN Calendar.Calendar_content IS '일정 내용';
+
+COMMENT ON COLUMN Calendar.Calendar_start IS '일정 시작 일시';
+
+COMMENT ON COLUMN Calendar.Calendar_end IS '일정 종료 일시';
+
+/* 일정관리 */
+CREATE TABLE TABLE13 (
+	COL NUMBER NOT NULL /* 일정관리 ID */
+);
+
+COMMENT ON TABLE TABLE13 IS '일정관리';
+
+COMMENT ON COLUMN TABLE13.COL IS '일정관리 ID';
+
+CREATE UNIQUE INDEX PK_TABLE13
+	ON TABLE13 (
+		COL ASC
+	);
+
+ALTER TABLE TABLE13
+	ADD
+		CONSTRAINT PK_TABLE13
+		PRIMARY KEY (
+			COL
+		);
+
+/* 아파트 */
+CREATE TABLE Apartment (
+	Apartment_name VARCHAR2(20) NOT NULL, /* 아파트 이름 */
+	Apartment_url VARCHAR2(255), /* 아파트 URL */
+	Apartment_zipcode VARCHAR2(50), /* 우편번호 */
+	Seoul_gu VARCHAR2(20) NOT NULL /* 구 */
+);
+
+COMMENT ON TABLE Apartment IS '아파트';
+
+COMMENT ON COLUMN Apartment.Apartment_name IS '아파트 이름';
+
+COMMENT ON COLUMN Apartment.Apartment_url IS '아파트 URL';
+
+COMMENT ON COLUMN Apartment.Apartment_zipcode IS '우편번호';
+
+COMMENT ON COLUMN Apartment.Seoul_gu IS '구';
+
+CREATE UNIQUE INDEX PK_Apartment
+	ON Apartment (
+		Apartment_name ASC
+	);
+
+ALTER TABLE Apartment
+	ADD
+		CONSTRAINT PK_Apartment
+		PRIMARY KEY (
+			Apartment_name
+		);
+
+/* 예약 */
+CREATE TABLE Reservation (
+	Reservation_id NUMBER NOT NULL, /* 예약 ID */
+	Facilty_id VARCHAR2(20) NOT NULL, /* 시설 코드 */
+	Member_id VARCHAR2(20) NOT NULL, /* 회원ID */
+	Time_date DATE NOT NULL /* 예약일 */
+);
+
+COMMENT ON TABLE Reservation IS '예약';
+
+COMMENT ON COLUMN Reservation.Reservation_id IS '예약 ID';
+
+COMMENT ON COLUMN Reservation.Facilty_id IS '시설 코드';
+
+COMMENT ON COLUMN Reservation.Member_id IS '회원ID';
+
+COMMENT ON COLUMN Reservation.Time_date IS '예약일';
+
+CREATE UNIQUE INDEX PK_Reservation
+	ON Reservation (
+		Reservation_id ASC
+	);
+
+ALTER TABLE Reservation
+	ADD
+		CONSTRAINT PK_Reservation
+		PRIMARY KEY (
+			Reservation_id
+		);
+
+/* 관리자 */
+CREATE TABLE Manager (
+	Manager_id VARCHAR2(20) NOT NULL, /* 관리자 ID */
+	Manager_pw VARCHAR2(20) /* 관리자 PW */
+);
+
+COMMENT ON TABLE Manager IS '관리자';
+
+COMMENT ON COLUMN Manager.Manager_id IS '관리자 ID';
+
+COMMENT ON COLUMN Manager.Manager_pw IS '관리자 PW';
+
+CREATE UNIQUE INDEX PK_Manager
+	ON Manager (
+		Manager_id ASC
+	);
+
+ALTER TABLE Manager
+	ADD
+		CONSTRAINT PK_Manager
+		PRIMARY KEY (
+			Manager_id
+		);
+
+/* 시설 */
+CREATE TABLE Facilty (
+	Facilty_id VARCHAR2(20) NOT NULL, /* 시설 코드 */
+	Facilty_name VARCHAR2(20) NOT NULL /* 시설 이름 */
+);
+
+COMMENT ON TABLE Facilty IS '시설';
+
+COMMENT ON COLUMN Facilty.Facilty_id IS '시설 코드';
+
+COMMENT ON COLUMN Facilty.Facilty_name IS '시설 이름';
+
+CREATE UNIQUE INDEX PK_Facilty
+	ON Facilty (
+		Facilty_id ASC
+	);
+
+ALTER TABLE Facilty
+	ADD
+		CONSTRAINT PK_Facilty
+		PRIMARY KEY (
+			Facilty_id
+		);
+
+/* 시간 */
+CREATE TABLE Time (
+	Time_date DATE NOT NULL, /* 예약일 */
+	Time_start DATE NOT NULL, /* 예약 시작 일시 */
+	Time_end DATE NOT NULL /* 예약 종료 일시 */
+);
+
+COMMENT ON TABLE Time IS '시간';
+
+COMMENT ON COLUMN Time.Time_date IS '예약일';
+
+COMMENT ON COLUMN Time.Time_start IS '예약 시작 일시';
+
+COMMENT ON COLUMN Time.Time_end IS '예약 종료 일시';
+
+CREATE UNIQUE INDEX PK_Time
+	ON Time (
+		Time_date ASC
+	);
+
+ALTER TABLE Time
+	ADD
+		CONSTRAINT PK_Time
+		PRIMARY KEY (
+			Time_date
+		);
+
+/* 서울시 */
+CREATE TABLE Seoul (
+	Seoul_gu VARCHAR2(20) NOT NULL /* 구 */
+);
+
+COMMENT ON TABLE Seoul IS '서울시';
+
+COMMENT ON COLUMN Seoul.Seoul_gu IS '구';
+
+CREATE UNIQUE INDEX PK_Seoul
+	ON Seoul (
+		Seoul_gu ASC
+	);
+
+ALTER TABLE Seoul
+	ADD
+		CONSTRAINT PK_Seoul
+		PRIMARY KEY (
+			Seoul_gu
+		);
+
+ALTER TABLE Join
+	ADD
+		CONSTRAINT FK_Member_TO_Join
+		FOREIGN KEY (
+			J_id
+		)
+		REFERENCES Member (
+			Member_id
+		);
+
+ALTER TABLE Board
+	ADD
+		CONSTRAINT FK_Board_category_TO_Board
+		FOREIGN KEY (
+			BoardCategory_code
+		)
+		REFERENCES Board_category (
+			BoardCategory_code
+		);
+
+ALTER TABLE Board
+	ADD
+		CONSTRAINT FK_Member_TO_Board
+		FOREIGN KEY (
+			Member_id
+		)
+		REFERENCES Member (
+			Member_id
+		);
+
+ALTER TABLE Board_file
+	ADD
+		CONSTRAINT FK_Board_TO_Board_file
+		FOREIGN KEY (
+			Board_id
+		)
+		REFERENCES Board (
+			Board_id
+		);
+
+ALTER TABLE TABLE8
+	ADD
+		CONSTRAINT FK_Board_TO_TABLE8
+		FOREIGN KEY (
+			Board_id
+		)
+		REFERENCES Board (
+			Board_id
+		);
+
+ALTER TABLE TABLE8
+	ADD
+		CONSTRAINT FK_Member_TO_TABLE8
+		FOREIGN KEY (
+			Member_id
+		)
+		REFERENCES Member (
+			Member_id
+		);
+
+ALTER TABLE Comments
+	ADD
+		CONSTRAINT FK_Board_TO_Comments
+		FOREIGN KEY (
+			Board_id
+		)
+		REFERENCES Board (
+			Board_id
+		);
+
+ALTER TABLE Comments
+	ADD
+		CONSTRAINT FK_Member_TO_Comments
+		FOREIGN KEY (
+			Member_id
+		)
+		REFERENCES Member (
+			Member_id
+		);
+
+ALTER TABLE TABLE11
+	ADD
+		CONSTRAINT FK_TABLE10_TO_TABLE11
+		FOREIGN KEY (
+			COL2
+		)
+		REFERENCES TABLE10 (
+			COL
+		);
+
+ALTER TABLE Calendar
+	ADD
+		CONSTRAINT FK_Manager_TO_Calendar
+		FOREIGN KEY (
+			Manager_id
+		)
+		REFERENCES Manager (
+			Manager_id
+		);
+
+ALTER TABLE Apartment
+	ADD
+		CONSTRAINT FK_Seoul_TO_Apartment
+		FOREIGN KEY (
+			Seoul_gu
+		)
+		REFERENCES Seoul (
+			Seoul_gu
+		);
+
+ALTER TABLE Reservation
+	ADD
+		CONSTRAINT FK_Facilty_TO_Reservation
+		FOREIGN KEY (
+			Facilty_id
+		)
+		REFERENCES Facilty (
+			Facilty_id
+		);
+
+ALTER TABLE Reservation
+	ADD
+		CONSTRAINT FK_Member_TO_Reservation
+		FOREIGN KEY (
+			Member_id
+		)
+		REFERENCES Member (
+			Member_id
+		);
+
+ALTER TABLE Reservation
+	ADD
+		CONSTRAINT FK_Time_TO_Reservation
+		FOREIGN KEY (
+			Time_date
+		)
+		REFERENCES Time (
+			Time_date
+		);

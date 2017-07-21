@@ -1,0 +1,994 @@
+/* Member */
+DROP TABLE Member 
+   CASCADE CONSTRAINTS;
+
+/* 게시판 관리 */
+DROP TABLE Board_category 
+   CASCADE CONSTRAINTS;
+
+/* 게시판 */
+DROP TABLE Board 
+   CASCADE CONSTRAINTS;
+
+/* 게시판 첨부 테이블 */
+DROP TABLE Board_file 
+   CASCADE CONSTRAINTS;
+
+/* 댓글 */
+DROP TABLE Comments 
+   CASCADE CONSTRAINTS;
+
+/* 일정 */
+DROP TABLE Calendar 
+   CASCADE CONSTRAINTS;
+
+/* 아파트 */
+DROP TABLE Apartment 
+   CASCADE CONSTRAINTS;
+
+/* 예약 */
+DROP TABLE Reservation 
+   CASCADE CONSTRAINTS;
+
+/* 시설 */
+DROP TABLE Facility 
+   CASCADE CONSTRAINTS;
+
+/* 서울시 */
+DROP TABLE Seoul 
+   CASCADE CONSTRAINTS;
+
+/* 갤러리 */
+DROP TABLE Gallery 
+   CASCADE CONSTRAINTS;
+
+/* Member */
+CREATE TABLE Member (
+   Member_id VARCHAR2(20) NOT NULL, /* 회원ID */
+   Member_pw VARCHAR2(20) NOT NULL, /* 회원PW */
+   Member_authority NUMBER NOT NULL, /* 권한 */
+   Member_zipcode VARCHAR2(20) NOT NULL, /* 우편번호 */
+   Member_dong VARCHAR2(20) NOT NULL, /* 동 */
+   Member_ho VARCHAR2(20) NOT NULL /* 호수 */
+);
+
+COMMENT ON TABLE Member IS 'Member';
+
+COMMENT ON COLUMN Member.Member_id IS '회원ID';
+
+COMMENT ON COLUMN Member.Member_pw IS '회원PW';
+
+COMMENT ON COLUMN Member.Member_authority IS '권한';
+
+COMMENT ON COLUMN Member.Member_zipcode IS '우편번호';
+
+COMMENT ON COLUMN Member.Member_dong IS '동';
+
+COMMENT ON COLUMN Member.Member_ho IS '호수';
+
+CREATE UNIQUE INDEX PK_Member
+   ON Member (
+      Member_id ASC
+   );
+
+ALTER TABLE Member
+   ADD
+      CONSTRAINT PK_Member
+      PRIMARY KEY (
+         Member_id
+      );
+
+/* 게시판 관리 */
+CREATE TABLE Board_category (
+   BoardCategory_code NUMBER NOT NULL, /* 게시판 코드 */
+   BoardCategory_name VARCHAR2(50) NOT NULL, /* 게시판 이름 */
+   BoardCategory_description VARCHAR2(500) /* 게시판 설명 */
+);
+
+COMMENT ON TABLE Board_category IS '게시판 관리';
+
+COMMENT ON COLUMN Board_category.BoardCategory_code IS '게시판 코드';
+
+COMMENT ON COLUMN Board_category.BoardCategory_name IS '게시판 이름';
+
+COMMENT ON COLUMN Board_category.BoardCategory_description IS '게시판 설명';
+
+CREATE UNIQUE INDEX PK_Board_category
+   ON Board_category (
+      BoardCategory_code ASC
+   );
+
+ALTER TABLE Board_category
+   ADD
+      CONSTRAINT PK_Board_category
+      PRIMARY KEY (
+         BoardCategory_code
+      );
+
+/* 게시판 */
+CREATE TABLE Board (
+   Board_id NUMBER NOT NULL, /* 게시글 번호 */
+   BoardCategory_code NUMBER NOT NULL, /* 게시판 코드 */
+   Member_id VARCHAR2(20) NOT NULL, /* 회원ID */
+   Board_title_h VARCHAR2(200), /* 게시글 앞 제목 */
+   Board_title_t VARCHAR2(300) NOT NULL, /* 게시글 뒷 제목 */
+   Board_content VARCHAR2(2000), /* 게시글 내용 */
+   Board_date DATE, /* 등록일자 */
+   Board_like NUMBER, /* 글 추천수 */
+   Board_hit NUMBER, /* 글 조회수 */
+   Ref NUMBER, /* Ref */
+   Depth NUMBER, /* Depth */
+   Step NUMBER, /* Step */
+   Member_zipcode VARCHAR2(20) /* 우편번호 */
+);
+
+COMMENT ON TABLE Board IS '게시판';
+
+COMMENT ON COLUMN Board.Board_id IS '게시글 번호';
+
+COMMENT ON COLUMN Board.BoardCategory_code IS '게시판 코드';
+
+COMMENT ON COLUMN Board.Member_id IS '회원ID';
+
+COMMENT ON COLUMN Board.Board_title_h IS '게시글 앞 제목';
+
+COMMENT ON COLUMN Board.Board_title_t IS '게시글 뒷 제목';
+
+COMMENT ON COLUMN Board.Board_content IS '게시글 내용';
+
+COMMENT ON COLUMN Board.Board_date IS '등록일자';
+
+COMMENT ON COLUMN Board.Board_like IS '글 추천수';
+
+COMMENT ON COLUMN Board.Board_hit IS '글 조회수';
+
+COMMENT ON COLUMN Board.Ref IS 'Ref';
+
+COMMENT ON COLUMN Board.Depth IS 'Depth';
+
+COMMENT ON COLUMN Board.Step IS 'Step';
+
+COMMENT ON COLUMN Board.Member_zipcode IS '우편번호';
+
+CREATE UNIQUE INDEX PK_Board
+   ON Board (
+      Board_id ASC
+   );
+
+ALTER TABLE Board
+   ADD
+      CONSTRAINT PK_Board
+      PRIMARY KEY (
+         Board_id
+      );
+
+/* 게시판 첨부 테이블 */
+CREATE TABLE Board_file (
+   Board_id NUMBER NOT NULL, /* 게시글 번호 */
+   BoardFile_name VARCHAR2(50) NOT NULL, /* 파일 이름 */
+   BoardFile_oriname VARCHAR(50) NOT NULL /* 파일 원래 이름 */
+);
+
+COMMENT ON TABLE Board_file IS '게시판 첨부 테이블';
+
+COMMENT ON COLUMN Board_file.Board_id IS '게시글 번호';
+
+COMMENT ON COLUMN Board_file.BoardFile_name IS '파일 이름';
+
+COMMENT ON COLUMN Board_file.BoardFile_oriname IS '파일 원래 이름';
+
+/* 댓글 */
+CREATE TABLE Comments (
+   Comment_id NUMBER NOT NULL, /* 댓글글번호 */
+   Board_id NUMBER NOT NULL, /* 게시글 번호 */
+   Member_id VARCHAR2(20) NOT NULL, /* 회원ID */
+   Comment_date DATE NOT NULL, /* 등록일자 */
+   Comment_content VARCHAR2(200) /* 댓글내용 */
+);
+
+COMMENT ON TABLE Comments IS '댓글';
+
+COMMENT ON COLUMN Comments.Comment_id IS '댓글글번호';
+
+COMMENT ON COLUMN Comments.Board_id IS '게시글 번호';
+
+COMMENT ON COLUMN Comments.Member_id IS '회원ID';
+
+COMMENT ON COLUMN Comments.Comment_date IS '등록일자';
+
+COMMENT ON COLUMN Comments.Comment_content IS '댓글내용';
+
+CREATE UNIQUE INDEX PK_Comments
+   ON Comments (
+      Comment_id ASC
+   );
+
+ALTER TABLE Comments
+   ADD
+      CONSTRAINT PK_Comments
+      PRIMARY KEY (
+         Comment_id
+      );
+
+/* 일정 */
+CREATE TABLE Calendar (
+   Calendar_id VARCHAR2(20) NOT NULL, /* 관리자 ID */
+   Calendar_content VARCHAR2(2000) NOT NULL, /* 일정 내용 */
+   Calendar_start Date, /* 일정 시작 일시 */
+   Calendar_end Date /* 일정 종료 일시 */
+);
+
+COMMENT ON TABLE Calendar IS '일정';
+
+COMMENT ON COLUMN Calendar.Calendar_id IS '관리자 ID';
+
+COMMENT ON COLUMN Calendar.Calendar_content IS '일정 내용';
+
+COMMENT ON COLUMN Calendar.Calendar_start IS '일정 시작 일시';
+
+COMMENT ON COLUMN Calendar.Calendar_end IS '일정 종료 일시';
+
+CREATE UNIQUE INDEX PK_Calendar
+   ON Calendar (
+      Calendar_id ASC
+   );
+
+ALTER TABLE Calendar
+   ADD
+      CONSTRAINT PK_Calendar
+      PRIMARY KEY (
+         Calendar_id
+      );
+
+/* 아파트 */
+CREATE TABLE Apartment (
+   Apartment_name VARCHAR2(100) NOT NULL, /* 아파트 이름 */
+   Apartment_url VARCHAR2(255), /* 아파트 URL */
+   Apartment_zipcode VARCHAR2(50), /* 우편번호 */
+   Seoul_gu VARCHAR2(20) NOT NULL /* 구 */
+);
+
+COMMENT ON TABLE Apartment IS '아파트';
+
+COMMENT ON COLUMN Apartment.Apartment_name IS '아파트 이름';
+
+COMMENT ON COLUMN Apartment.Apartment_url IS '아파트 URL';
+
+COMMENT ON COLUMN Apartment.Apartment_zipcode IS '우편번호';
+
+COMMENT ON COLUMN Apartment.Seoul_gu IS '구';
+
+CREATE UNIQUE INDEX PK_Apartment
+   ON Apartment (
+      Apartment_name ASC
+   );
+
+ALTER TABLE Apartment
+   ADD
+      CONSTRAINT PK_Apartment
+      PRIMARY KEY (
+         Apartment_name
+      );
+
+/* 예약 */
+CREATE TABLE Reservation (
+   Reservation_id NUMBER NOT NULL, /* 예약 ID */
+   Reservation_time DATE, /* 예약일 */
+   Time_start VARCHAR2(20) NOT NULL, /* 예약 시간 */
+   Facility_id VARCHAR2(20) NOT NULL, /* 시설 코드 */
+   Member_id VARCHAR2(20) NOT NULL /* 회원ID */
+);
+
+COMMENT ON TABLE Reservation IS '예약';
+
+COMMENT ON COLUMN Reservation.Reservation_id IS '예약 ID';
+
+COMMENT ON COLUMN Reservation.Reservation_time IS '예약일';
+
+COMMENT ON COLUMN Reservation.Time_start IS '예약 시간';
+
+COMMENT ON COLUMN Reservation.Facility_id IS '시설 코드';
+
+COMMENT ON COLUMN Reservation.Member_id IS '회원ID';
+
+COMMENT ON COLUMN Reservation.Member_zipcode IS '우편번호';
+
+CREATE UNIQUE INDEX PK_Reservation
+   ON Reservation (
+      Reservation_id ASC
+   );
+
+ALTER TABLE Reservation
+   ADD
+      CONSTRAINT PK_Reservation
+      PRIMARY KEY (
+         Reservation_id
+      );
+
+/* 시설 */
+CREATE TABLE Facility (
+   Facility_id VARCHAR2(20) NOT NULL, /* 시설 코드 */
+   Facility_name VARCHAR2(50) NOT NULL, /* 시설 이름 */
+   Apartment_name VARCHAR2(100) /* 아파트 이름 */
+);
+
+COMMENT ON TABLE Facility IS '시설';
+
+COMMENT ON COLUMN Facility.Facility_id IS '시설 코드';
+
+COMMENT ON COLUMN Facility.Facility_name IS '시설 이름';
+
+COMMENT ON COLUMN Facility.Apartment_name IS '아파트 이름';
+
+CREATE UNIQUE INDEX PK_Facility
+   ON Facility (
+      Facility_id ASC
+   );
+
+ALTER TABLE Facility
+   ADD
+      CONSTRAINT PK_Facility
+      PRIMARY KEY (
+         Facility_id
+      );
+
+/* 서울시 */
+CREATE TABLE Seoul (
+   Seoul_gu VARCHAR2(20) NOT NULL /* 구 */
+);
+
+COMMENT ON TABLE Seoul IS '서울시';
+
+COMMENT ON COLUMN Seoul.Seoul_gu IS '구';
+
+CREATE UNIQUE INDEX PK_Seoul
+   ON Seoul (
+      Seoul_gu ASC
+   );
+
+ALTER TABLE Seoul
+   ADD
+      CONSTRAINT PK_Seoul
+      PRIMARY KEY (
+         Seoul_gu
+      );
+
+/* 갤러리 */
+CREATE TABLE Gallery (
+   Gallery_id NUMBER NOT NULL, /* 갤러리 글번호 */
+   Gallery_title VARCHAR2(100), /* 갤러리 제목 */
+   Member_id VARCHAR2(20), /* 회원ID */
+   Gallery_date DATE, /* 갤러리 등록일 */
+   Gallery_like NUMBER, /* 갤러리 추천수 */
+   Gallery_file  VARCHAR2(50), /* 갤러리 파일이름 */
+   Gallery_oriname VARCHAR2(50), /* 갤러리 파일 원래이름 */
+    Gallery_content VARCHAR2(100) /* 갤러리 내용 */
+);
+
+COMMENT ON TABLE Gallery IS '갤러리';
+
+COMMENT ON COLUMN Gallery.Gallery_id IS '갤러리 글번호';
+
+COMMENT ON COLUMN Gallery.Gallery_title IS '갤러리 제목';
+
+COMMENT ON COLUMN Gallery.Member_id IS '회원ID';
+
+COMMENT ON COLUMN Gallery.Gallery_date IS '갤러리 등록일';
+
+COMMENT ON COLUMN Gallery.Gallery_like IS '갤러리 추천수';
+
+COMMENT ON COLUMN Gallery.Gallery_file  IS '갤러리 파일이름';
+
+COMMENT ON COLUMN Gallery.Gallery_oriname IS '갤러리 파일 원래이름';
+
+COMMENT ON COLUMN Gallery. Gallery_content IS '갤러리 내용';
+
+CREATE UNIQUE INDEX PK_Gallery
+   ON Gallery (
+      Gallery_id ASC
+   );
+
+ALTER TABLE Gallery
+   ADD
+      CONSTRAINT PK_Gallery
+      PRIMARY KEY (
+         Gallery_id
+      );
+
+ALTER TABLE Board
+   ADD
+      CONSTRAINT FK_Board_category_TO_Board
+      FOREIGN KEY (
+         BoardCategory_code
+      )
+      REFERENCES Board_category (
+         BoardCategory_code
+      );
+
+ALTER TABLE Board
+   ADD
+      CONSTRAINT FK_Member_TO_Board
+      FOREIGN KEY (
+         Member_id
+      )
+      REFERENCES Member (
+         Member_id
+      );
+
+ALTER TABLE Board_file
+   ADD
+      CONSTRAINT FK_Board_TO_Board_file
+      FOREIGN KEY (
+         Board_id
+      )
+      REFERENCES Board (
+         Board_id
+      );
+
+ALTER TABLE Comments
+   ADD
+      CONSTRAINT FK_Board_TO_Comments
+      FOREIGN KEY (
+         Board_id
+      )
+      REFERENCES Board (
+         Board_id
+      );
+
+ALTER TABLE Comments
+   ADD
+      CONSTRAINT FK_Member_TO_Comments
+      FOREIGN KEY (
+         Member_id
+      )
+      REFERENCES Member (
+         Member_id
+      );
+
+
+ALTER TABLE Apartment
+   ADD
+      CONSTRAINT FK_Seoul_TO_Apartment
+      FOREIGN KEY (
+         Seoul_gu
+      )
+      REFERENCES Seoul (
+         Seoul_gu
+      );
+
+ALTER TABLE Reservation
+   ADD
+      CONSTRAINT FK_Facility_TO_Reservation
+      FOREIGN KEY (
+         Facility_id
+      )
+      REFERENCES Facility (
+         Facility_id
+      );
+
+ALTER TABLE Reservation
+   ADD
+      CONSTRAINT FK_Member_TO_Reservation
+      FOREIGN KEY (
+         Member_id
+      )
+      REFERENCES Member (
+         Member_id
+      );
+
+ALTER TABLE Facility
+   ADD
+      CONSTRAINT FK_Apartment_TO_Facility
+      FOREIGN KEY (
+         Apartment_name
+      )
+      REFERENCES Apartment (
+         Apartment_name
+      );
+
+ALTER TABLE Gallery
+   ADD
+      CONSTRAINT FK_Member_TO_Gallery
+      FOREIGN KEY (
+         Member_id
+      )
+      REFERENCES Member (
+         Member_id
+      );
+
+
+
+create sequence board_id;
+create sequence comment_id;
+
+CREATE SEQUENCE Calendar_Calendar_id
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+CREATE SEQUENCE Gallery_idx
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+
+CREATE SEQUENCE reservation_idx
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+commit;
+
+insert into Seoul
+values('강서구');
+insert into Seoul
+values('구로구');
+insert into Seoul
+values('양천구');
+insert into Seoul
+values('금천구');
+insert into Seoul
+values('영등포구');
+insert into Seoul
+values('마포구');
+insert into Seoul
+values('서대문구');
+insert into Seoul
+values('은평구');
+insert into Seoul
+values('종로구');
+insert into Seoul
+values('중구');
+insert into Seoul
+values('용산구');
+insert into Seoul
+values('동작구');
+insert into Seoul
+values('관악구');
+insert into Seoul
+values('서초구');
+insert into Seoul
+values('강남구');
+insert into Seoul
+values('성동구');
+insert into Seoul
+values('동대문구');
+insert into Seoul
+values('성북구');
+insert into Seoul
+values('강북구');
+insert into Seoul
+values('도봉구');
+insert into Seoul
+values('노원구');
+insert into Seoul
+values('중량구');
+insert into Seoul
+values('광진구');
+insert into Seoul
+values('송파구');
+insert into Seoul
+values('강동구');
+
+--강남구 정보1
+insert into APARTMENT
+values('개포우성9차','http://192.168.0.135:8090/0427Project_Ko/index.jsp','11111','강남구');
+insert into APARTMENT
+values('개포주공2단지','http://192.168.0.135:8090/0427Project_Ko/index.jsp','11111','강남구');
+insert into APARTMENT
+values('개포주공3단지','http://192.168.0.135:8090/0427Project_Ko/index.jsp','11111','강남구');
+insert into APARTMENT
+values('논현동부센트레빌','http://192.168.0.135:8090/0427Project_Ko/index.jsp','11111','강남구');
+insert into APARTMENT
+values('논현동꿈에그린','http://192.168.0.135:8090/0427Project_Ko/index.jsp','11111','강남구');
+insert into APARTMENT
+values('대치쌍용2차','http://192.168.0.135:8090/0427Project_Ko/index.jsp','11111','강남구');
+insert into APARTMENT
+values('주공6단지','http://192.168.0.135:8090/0427Project_Ko/index.jsp','11111','강남구');
+
+--강동구 정보2
+insert into APARTMENT
+values('고덕아이파크아파트','http://192.168.0.135:8090/0427Project_Ko/index.jsp','22222','강동구');
+insert into APARTMENT
+values('고덕주공2단지','http://192.168.0.135:8090/0427Project_Ko/index.jsp','22222','강동구');
+insert into APARTMENT
+values('길동신동아3차','http://192.168.0.135:8090/0427Project_Ko/index.jsp','22222','강동구');
+insert into APARTMENT
+values('길동삼익파트','http://192.168.0.135:8090/0427Project_Ko/index.jsp','22222','강동구');
+insert into APARTMENT
+values('둔촌현대2차아파트','http://192.168.0.135:8090/0427Project_Ko/index.jsp','22222','강동구');
+insert into APARTMENT
+values('둔촌현대3차아파트','http://192.168.0.135:8090/0427Project_Ko/index.jsp','22222','강동구');
+insert into APARTMENT
+values('신성둔촌미소지움2차','http://192.168.0.135:8090/0427Project_Ko/index.jsp','22222','강동구');
+
+--강북구 정보3
+insert into APARTMENT
+values('SK북한산시티아파트','http://192.168.0.135:8090/0427Project_Ko/index.jsp','33333','강북구');
+insert into APARTMENT
+values('래미안미아1차','http://192.168.0.135:8090/0427Project_Ko/index.jsp','33333','강북구');
+insert into APARTMENT
+values('미아경남아너스빌','http://192.168.0.135:8090/0427Project_Ko/index.jsp','33333','강북구');
+insert into APARTMENT
+values('벽산라이브파크','http://192.168.0.135:8090/0427Project_Ko/index.jsp','33333','강북구');
+insert into APARTMENT
+values('삼각산아이원','http://192.168.0.135:8090/0427Project_Ko/index.jsp','33333','강북구');
+insert into APARTMENT
+values('송천센트레빌','http://192.168.0.135:8090/0427Project_Ko/index.jsp','33333','강북구');
+insert into APARTMENT
+values('한일유앤아이','http://192.168.0.135:8090/0427Project_Ko/index.jsp','33333','강북구');
+
+--강서구 정보4
+insert into APARTMENT
+values('염창한강동아','http://192.168.0.135:8090/0427Project_Ko/index.jsp','44444','강서구');
+insert into APARTMENT
+values('염창한화꿈에그린','http://192.168.0.135:8090/0427Project_Ko/index.jsp','44444','강서구');
+insert into APARTMENT
+values('강서월드메르디앙','http://192.168.0.135:8090/0427Project_Ko/index.jsp','44444','강서구');
+insert into APARTMENT
+values('길성그랑프리텔1차','http://192.168.0.135:8090/0427Project_Ko/index.jsp','44444','강서구');
+insert into APARTMENT
+values('화곡유림노르웨이숲','http://192.168.0.135:8090/0427Project_Ko/index.jsp','44444','강서구');
+insert into APARTMENT
+values('화곡중앙하이츠','http://192.168.0.135:8090/0427Project_Ko/index.jsp','44444','강서구');
+insert into APARTMENT
+values('우장산에스케이뷰','http://192.168.0.135:8090/0427Project_Ko/index.jsp','44444','강서구');
+
+
+--관악구 정보5
+insert into APARTMENT
+values('신림우방','http://192.168.0.135:8090/0427Project_Ko/index.jsp','55555','관악구');
+insert into APARTMENT
+values('관악벽산블루밍','http://192.168.0.135:8090/0427Project_Ko/index.jsp','55555','관악구');
+insert into APARTMENT
+values('낙성대현대','http://192.168.0.135:8090/0427Project_Ko/index.jsp','55555','관악구');
+insert into APARTMENT
+values('봉천은천1단지','http://192.168.0.135:8090/0427Project_Ko/index.jsp','55555','관악구');
+insert into APARTMENT
+values('신림신도브래뉴','http://192.168.0.135:8090/0427Project_Ko/index.jsp','55555','관악구');
+insert into APARTMENT
+values('관악현대','http://192.168.0.135:8090/0427Project_Ko/index.jsp','55555','관악구');
+insert into APARTMENT
+values('낙성대현대홈타운','http://192.168.0.135:8090/0427Project_Ko/index.jsp','55555','관악구');
+
+--광진구 정보6
+insert into APARTMENT
+values('봉천인헌','http://192.168.0.135:8090/0427Project_Ko/index.jsp','66666','광진구');
+insert into APARTMENT
+values('코끼리','http://192.168.0.135:8090/0427Project_Ko/index.jsp','06318','광진구');
+
+insert into APARTMENT
+values('건영3차아파트','http://192.168.0.135:8090/0427Project_Ko/index.jsp','66666','광진구');
+insert into APARTMENT
+values('대학동현대','http://192.168.0.135:8090/0427Project_Ko/index.jsp','66666','광진구');
+insert into APARTMENT
+values('신림동부센트레빌','http://192.168.0.135:8090/0427Project_Ko/index.jsp','66666','광진구');
+insert into APARTMENT
+values('봉천두산1,2단지','http://192.168.0.135:8090/0427Project_Ko/index.jsp','66666','광진구');
+insert into APARTMENT
+values('서울대입구삼성아파트','http://192.168.0.135:8090/0427Project_Ko/index.jsp','66666','광진구');
+insert into APARTMENT
+values('서울대입구아이원','http://192.168.0.135:8090/0427Project_Ko/index.jsp','66666','광진구');
+
+--구로구 정보7
+insert into APARTMENT
+values('자양2차현대','http://192.168.0.135:8090/0427Project_Ko/index.jsp','77777','구로구');
+insert into APARTMENT
+values('자양경남아너스빌','http://192.168.0.135:8090/0427Project_Ko/index.jsp','77777','구로구');
+insert into APARTMENT
+values('자양대동','http://192.168.0.135:8090/0427Project_Ko/index.jsp','77777','구로구');
+insert into APARTMENT
+values('자양로얄동아','http://192.168.0.135:8090/0427Project_Ko/index.jsp','77777','구로구');
+insert into APARTMENT
+values('자양현대','http://192.168.0.135:8090/0427Project_Ko/index.jsp','77777','구로구');
+insert into APARTMENT
+values('자양현대홈타운8차','http://192.168.0.135:8090/0427Project_Ko/index.jsp','77777','구로구');
+insert into APARTMENT
+values('중곡SK','http://192.168.0.135:8090/0427Project_Ko/index.jsp','77777','구로구');
+
+--금천구 정보8
+insert into APARTMENT
+values('관악벽산2단지','http://192.168.0.135:8090/0427Project_Ko/index.jsp','88888','금천구');
+insert into APARTMENT
+values('시흥현대빌라','http://192.168.0.135:8090/0427Project_Ko/index.jsp','88888','금천구');
+insert into APARTMENT
+values('시흥금강','http://192.168.0.135:8090/0427Project_Ko/index.jsp','88888','금천구');
+insert into APARTMENT
+values('시흥월드메르디앙','http://192.168.0.135:8090/0427Project_Ko/index.jsp','88888','금천구');
+insert into APARTMENT
+values('관악산신도브래뉴','http://192.168.0.135:8090/0427Project_Ko/index.jsp','88888','금천구');
+insert into APARTMENT
+values('남서울건영2차','http://192.168.0.135:8090/0427Project_Ko/index.jsp','88888','금천구');
+insert into APARTMENT
+values('관악벽산타운5단지','http://192.168.0.135:8090/0427Project_Ko/index.jsp','88888','금천구');
+
+--노원구 정보9
+insert into APARTMENT
+values('남서울건영아파트','http://192.168.0.135:8090/0427Project_Ko/index.jsp','99999','노원구');
+insert into APARTMENT
+values('남서울힐스테이트','http://192.168.0.135:8090/0427Project_Ko/index.jsp','99999','노원구');
+insert into APARTMENT
+values('시흥목련','http://192.168.0.135:8090/0427Project_Ko/index.jsp','99999','노원구');
+insert into APARTMENT
+values('관악벽산2단지','http://192.168.0.135:8090/0427Project_Ko/index.jsp','99999','노원구');
+insert into APARTMENT
+values('시흥현대빌라','http://192.168.0.135:8090/0427Project_Ko/index.jsp','99999','노원구');
+insert into APARTMENT
+values('시흥월드메르디앙','http://192.168.0.135:8090/0427Project_Ko/index.jsp','99999','노원구');
+insert into APARTMENT
+values('현대공무원','http://192.168.0.135:8090/0427Project_Ko/index.jsp','99999','노원구');
+
+--도봉구 정보10
+insert into APARTMENT
+values('상계한신1차','http://192.168.0.135:8090/0427Project_Ko/index.jsp','10101','도봉구');
+insert into APARTMENT
+values('상계주공2단지','http://192.168.0.135:8090/0427Project_Ko/index.jsp','10101','도봉구');
+insert into APARTMENT
+values('상계보람','http://192.168.0.135:8090/0427Project_Ko/index.jsp','10101','도봉구');
+insert into APARTMENT
+values('상계대망드림힐','http://192.168.0.135:8090/0427Project_Ko/index.jsp','10101','도봉구');
+insert into APARTMENT
+values('상계마들','http://192.168.0.135:8090/0427Project_Ko/index.jsp','10101','도봉구');
+insert into APARTMENT
+values('상계마들대림','http://192.168.0.135:8090/0427Project_Ko/index.jsp','10101','도봉구');
+insert into APARTMENT
+values('삼계불암대림','http://192.168.0.135:8090/0427Project_Ko/index.jsp','10101','도봉구');
+
+--동대문구 정보11
+insert into APARTMENT
+values('쌍문경남','http://192.168.0.135:8090/0427Project_Ko/index.jsp','10111','동대문구');
+insert into APARTMENT
+values('쌍문한양2/3차','http://192.168.0.135:8090/0427Project_Ko/index.jsp','10111','동대문구');
+insert into APARTMENT
+values('창동현대타운','http://192.168.0.135:8090/0427Project_Ko/index.jsp','10111','동대문구');
+insert into APARTMENT
+values('창동금융','http://192.168.0.135:8090/0427Project_Ko/index.jsp','10111','동대문구');
+insert into APARTMENT
+values('창동동아청솔','http://192.168.0.135:8090/0427Project_Ko/index.jsp','10111','동대문구');
+insert into APARTMENT
+values('창동쌍용','http://192.168.0.135:8090/0427Project_Ko/index.jsp','10111','동대문구');
+insert into APARTMENT
+values('북한산한신휴플러스','http://192.168.0.135:8090/0427Project_Ko/index.jsp','10111','동대문구');
+
+--동작구 정보12
+insert into APARTMENT
+values('유원강변','http://192.168.0.135:8090/0427Project_Ko/index.jsp','12121','동작구');
+insert into APARTMENT
+values('한강쌍용','http://192.168.0.135:8090/0427Project_Ko/index.jsp','12121','동작구');
+insert into APARTMENT
+values('사당제일','http://192.168.0.135:8090/0427Project_Ko/index.jsp','12121','동작구');
+insert into APARTMENT
+values('사당극동','http://192.168.0.135:8090/0427Project_Ko/index.jsp','12121','동작구');
+insert into APARTMENT
+values('사당롯데캐슬샤인','http://192.168.0.135:8090/0427Project_Ko/index.jsp','12121','동작구');
+insert into APARTMENT
+values('사당자이','http://192.168.0.135:8090/0427Project_Ko/index.jsp','12121','동작구');
+insert into APARTMENT
+values('사당현대아파트','http://192.168.0.135:8090/0427Project_Ko/index.jsp','12121','동작구');
+
+--마포구 정보13
+insert into APARTMENT
+values('상도건영','http://192.168.0.135:8090/0427Project_Ko/index.jsp','13131','마포구');
+insert into APARTMENT
+values('브라운스톤상도','http://192.168.0.135:8090/0427Project_Ko/index.jsp','13131','마포구');
+insert into APARTMENT
+values('상도경향렉스빌','http://192.168.0.135:8090/0427Project_Ko/index.jsp','13131','마포구');
+insert into APARTMENT
+values('상도더샵','http://192.168.0.135:8090/0427Project_Ko/index.jsp','13131','마포구');
+insert into APARTMENT
+values('동작상떼빌주상복합','http://192.168.0.135:8090/0427Project_Ko/index.jsp','13131','마포구');
+insert into APARTMENT
+values('신대방경남교수','http://192.168.0.135:8090/0427Project_Ko/index.jsp','13131','마포구');
+insert into APARTMENT
+values('신대방경남아너스빌','http://192.168.0.135:8090/0427Project_Ko/index.jsp','13131','마포구');
+
+--서대문구 정보14
+insert into APARTMENT
+values('래미안남가좌2차','http://192.168.0.135:8090/0427Project_Ko/index.jsp','14141','서대문구');
+insert into APARTMENT
+values('DMC센트레빌','http://192.168.0.135:8090/0427Project_Ko/index.jsp','14141','서대문구');
+insert into APARTMENT
+values('대현럭키','http://192.168.0.135:8090/0427Project_Ko/index.jsp','14141','서대문구');
+insert into APARTMENT
+values('월드컵현대','http://192.168.0.135:8090/0427Project_Ko/index.jsp','14141','서대문구');
+insert into APARTMENT
+values('북가좌삼호','http://192.168.0.135:8090/0427Project_Ko/index.jsp','14141','서대문구');
+insert into APARTMENT
+values('북가좌현대','http://192.168.0.135:8090/0427Project_Ko/index.jsp','14141','서대문구');
+insert into APARTMENT
+values('연희한양아파트','http://192.168.0.135:8090/0427Project_Ko/index.jsp','14141','서대문구');
+
+--서초구 정보15
+insert into APARTMENT
+values('서초더샵포레','http://192.168.0.135:8090/0427Project_Ko/index.jsp','15151','서초구');
+insert into APARTMENT
+values('반포리체','http://192.168.0.135:8090/0427Project_Ko/index.jsp','15151','서초구');
+insert into APARTMENT
+values('반포푸르지오','http://192.168.0.135:8090/0427Project_Ko/index.jsp','15151','서초구');
+insert into APARTMENT
+values('반포한신서래','http://192.168.0.135:8090/0427Project_Ko/index.jsp','15151','서초구');
+insert into APARTMENT
+values('래미안퍼스티지','http://192.168.0.135:8090/0427Project_Ko/index.jsp','15151','서초구');
+insert into APARTMENT
+values('반포힐스테이트','http://192.168.0.135:8090/0427Project_Ko/index.jsp','15151','서초구');
+insert into APARTMENT
+values('삼호가든맨션3차','http://192.168.0.135:8090/0427Project_Ko/index.jsp','15151','서초구');
+
+
+
+--성동구 정보16
+insert into APARTMENT
+values('성수우방2차','http://192.168.0.135:8090/0427Project_Ko/index.jsp','16161','성동구');
+insert into APARTMENT
+values('성수한진타운','http://192.168.0.135:8090/0427Project_Ko/index.jsp','16161','성동구');
+insert into APARTMENT
+values('서울숲힐스테이트','http://192.168.0.135:8090/0427Project_Ko/index.jsp','16161','성동구');
+insert into APARTMENT
+values('서울숲아이파크','http://192.168.0.135:8090/0427Project_Ko/index.jsp','16161','성동구');
+insert into APARTMENT
+values('래미안옥수리버젠','http://192.168.0.135:8090/0427Project_Ko/index.jsp','16161','성동구');
+insert into APARTMENT
+values('옥수극동','http://192.168.0.135:8090/0427Project_Ko/index.jsp','16161','성동구');
+insert into APARTMENT
+values('어울림더리버아파트','http://192.168.0.135:8090/0427Project_Ko/index.jsp','16161','성동구');
+
+--성북구 정보17
+insert into APARTMENT
+values('래미안석관','http://192.168.0.135:8090/0427Project_Ko/index.jsp','17171','성북구');
+insert into APARTMENT
+values('선관래미안제2임대','http://192.168.0.135:8090/0427Project_Ko/index.jsp','17171','성북구');
+insert into APARTMENT
+values('석관중앙하이츠','http://192.168.0.135:8090/0427Project_Ko/index.jsp','17171','성북구');
+insert into APARTMENT
+values('석관코오롱','http://192.168.0.135:8090/0427Project_Ko/index.jsp','17171','성북구');
+insert into APARTMENT
+values('신동아파밀리에','http://192.168.0.135:8090/0427Project_Ko/index.jsp','17171','성북구');
+insert into APARTMENT
+values('안암삼성래미안','http://192.168.0.135:8090/0427Project_Ko/index.jsp','17171','성북구');
+insert into APARTMENT
+values('안암대광','http://192.168.0.135:8090/0427Project_Ko/index.jsp','17171','성북구');
+
+
+--송파구 정보18
+insert into APARTMENT
+values('문정래미안','http://192.168.0.135:8090/0427Project_Ko/index.jsp','18181','송파구');
+insert into APARTMENT
+values('올림픽훼밀리타운','http://192.168.0.135:8090/0427Project_Ko/index.jsp','18181','송파구');
+insert into APARTMENT
+values('잠실한양3차','http://192.168.0.135:8090/0427Project_Ko/index.jsp','18181','송파구');
+insert into APARTMENT
+values('잠실한솔','http://192.168.0.135:8090/0427Project_Ko/index.jsp','18181','송파구');
+insert into APARTMENT
+values('송파호수임광','http://192.168.0.135:8090/0427Project_Ko/index.jsp','18181','송파구');
+insert into APARTMENT
+values('송파삼성래미안','http://192.168.0.135:8090/0427Project_Ko/index.jsp','18181','송파구');
+insert into APARTMENT
+values('래미안송파파인탑','http://192.168.0.135:8090/0427Project_Ko/index.jsp','18181','송파구');
+
+
+--양천구 정보19
+insert into APARTMENT
+values('신월신안약수','http://192.168.0.135:8090/0427Project_Ko/index.jsp','19191','양천구');
+insert into APARTMENT
+values('양천롯데캐슬','http://192.168.0.135:8090/0427Project_Ko/index.jsp','19191','양천구');
+insert into APARTMENT
+values('목동9단지','http://192.168.0.135:8090/0427Project_Ko/index.jsp','19191','양천구');
+insert into APARTMENT
+values('목동현대아파트','http://192.168.0.135:8090/0427Project_Ko/index.jsp','19191','양천구');
+insert into APARTMENT
+values('신정현대','http://192.168.0.135:8090/0427Project_Ko/index.jsp','19191','양천구');
+insert into APARTMENT
+values('신정현대아이파크','http://192.168.0.135:8090/0427Project_Ko/index.jsp','19191','양천구');
+insert into APARTMENT
+values('신정5차현대','http://192.168.0.135:8090/0427Project_Ko/index.jsp','19191','양천구');
+
+
+--영등포구 정보20
+insert into APARTMENT
+values('문래대원','http://192.168.0.135:8090/0427Project_Ko/index.jsp','20202','영등포구');
+insert into APARTMENT
+values('신기목련','http://192.168.0.135:8090/0427Project_Ko/index.jsp','20202','영등포구');
+insert into APARTMENT
+values('신길삼두','http://192.168.0.135:8090/0427Project_Ko/index.jsp','20202','영등포구');
+insert into APARTMENT
+values('신길자이','http://192.168.0.135:8090/0427Project_Ko/index.jsp','20202','영등포구');
+insert into APARTMENT
+values('신길1차우성아파트','http://192.168.0.135:8090/0427Project_Ko/index.jsp','20202','영등포구');
+insert into APARTMENT
+values('보라매경남아너스빌','http://192.168.0.135:8090/0427Project_Ko/index.jsp','20202','영등포구');
+insert into APARTMENT
+values('보라매두산위브','http://192.168.0.135:8090/0427Project_Ko/index.jsp','20202','영등포구');
+
+--용산구 정보21
+insert into APARTMENT
+values('용산푸르지오파크타운','http://192.168.0.135:8090/0427Project_Ko/index.jsp','21212','용산구');
+insert into APARTMENT
+values('보광삼성리버빌','http://192.168.0.135:8090/0427Project_Ko/index.jsp','21212','용산구');
+insert into APARTMENT
+values('신동아아파트','http://192.168.0.135:8090/0427Project_Ko/index.jsp','21212','용산구');
+insert into APARTMENT
+values('서빙고금호베스트빌','http://192.168.0.135:8090/0427Project_Ko/index.jsp','21212','용산구');
+insert into APARTMENT
+values('신창세상리버하이빌','http://192.168.0.135:8090/0427Project_Ko/index.jsp','21212','용산구');
+insert into APARTMENT
+values('브라운스톤용산','http://192.168.0.135:8090/0427Project_Ko/index.jsp','21212','용산구');
+insert into APARTMENT
+values('리첸시아용산','http://192.168.0.135:8090/0427Project_Ko/index.jsp','21212','용산구');
+
+
+--은평구 정보22
+insert into APARTMENT
+values('녹번대림','http://192.168.0.135:8090/0427Project_Ko/index.jsp','21211','은평구');
+insert into APARTMENT
+values('불광미성','http://192.168.0.135:8090/0427Project_Ko/index.jsp','21211','은평구');
+insert into APARTMENT
+values('북한산래미안임대','http://192.168.0.135:8090/0427Project_Ko/index.jsp','21211','은평구');
+insert into APARTMENT
+values('북한산수자인','http://192.168.0.135:8090/0427Project_Ko/index.jsp','21211','은평구');
+insert into APARTMENT
+values('DMC자이1단지','http://192.168.0.135:8090/0427Project_Ko/index.jsp','21211','은평구');
+insert into APARTMENT
+values('수색대림한숲타운','http://192.168.0.135:8090/0427Project_Ko/index.jsp','21211','은평구');
+insert into APARTMENT
+values('북한산대창센시티','http://192.168.0.135:8090/0427Project_Ko/index.jsp','21211','은평구');
+
+
+
+--종로구 정보23
+insert into APARTMENT
+values('경희궁의아침3단지','http://192.168.0.135:8090/0427Project_Ko/index.jsp','23232','종로구');
+insert into APARTMENT
+values('명륜아남1차','http://192.168.0.135:8090/0427Project_Ko/index.jsp','23232','종로구');
+insert into APARTMENT
+values('인왕산아이파크','http://192.168.0.135:8090/0427Project_Ko/index.jsp','23232','종로구');
+insert into APARTMENT
+values('롯데캐슬천지인','http://192.168.0.135:8090/0427Project_Ko/index.jsp','23232','종로구');
+insert into APARTMENT
+values('종로센트레빌','http://192.168.0.135:8090/0427Project_Ko/index.jsp','23232','종로구');
+insert into APARTMENT
+values('창신쌍용2단지','http://192.168.0.135:8090/0427Project_Ko/index.jsp','23232','종로구');
+insert into APARTMENT
+values('평창롯데','http://192.168.0.135:8090/0427Project_Ko/index.jsp','23232','종로구');
+
+
+--중구 정보24
+insert into APARTMENT
+values('신당삼성','http://192.168.0.135:8090/0427Project_Ko/index.jsp','24242','중구');
+insert into APARTMENT
+values('신당삼성임대','http://192.168.0.135:8090/0427Project_Ko/index.jsp','24242','중구');
+insert into APARTMENT
+values('래미안신당하이베르','http://192.168.0.135:8090/0427Project_Ko/index.jsp','24242','중구');
+insert into APARTMENT
+values('신당푸르지오','http://192.168.0.135:8090/0427Project_Ko/index.jsp','24242','중구');
+insert into APARTMENT
+values('약수하이츠아파트','http://192.168.0.135:8090/0427Project_Ko/index.jsp','24242','중구');
+insert into APARTMENT
+values('중림삼성래미안아파트','http://192.168.0.135:8090/0427Project_Ko/index.jsp','24242','중구');
+insert into APARTMENT
+values('남산센트럴자이','http://192.168.0.135:8090/0427Project_Ko/index.jsp','24242','중구');
+insert into APARTMENT
+values('코끼리테스트아파트','/0431_Project_Ko_j/view/homepage.jsp','02230','중량구');
+insert into APARTMENT
+values('코끼리테스트아파트1','/view/homepage.jsp','02134','중량구');
+
+
+
+alter table member modify(member_id varchar2(100));
+
+alter table board modify(member_id varchar2(100));
+
+alter table comments modify(member_id varchar2(100));
+
+
+insert into board_category values(1, 'NOTICE BOARD', '공지사항 게시판입니다. 아파트의 알림 사항은 이 게시판을 참고해주세요.');
+insert into board_category values(2, 'COMMUNITY BOARD', '소통 게시판입니다. 자유롭게 의견을 공유해주세요~');
+
+insert into facility(FACILITY_ID, FACILITY_NAME, apartment_name) values('수영장','코끼리수영장', '코끼리');
+insert into facility(FACILITY_ID, FACILITY_NAME, apartment_name) values('헬스장','코끼리헬스장', '코끼리');
+insert into facility(FACILITY_ID, FACILITY_NAME, apartment_name) values('테니스장','코끼리테니스장', '코끼리');
+insert into facility(FACILITY_ID, FACILITY_NAME, apartment_name) values('스크린골프장','코끼리스크린골프장', '코끼리');
+insert into facility(FACILITY_ID, FACILITY_NAME, apartment_name) values('탁구장','코끼리탁구장', '코끼리');
+
+insert into member values('manager','1111',2,'02134','0','0');
+-- 최초 관리자 등록
+commit;
