@@ -1,0 +1,220 @@
+﻿file: C:/Users/anscr/Desktop/SoftBotProject/ChatScript/../Jarvis/childhood.top 0
+    topic: ~childhood 2
+        rule: ~childhood.0.0- t:  6
+          line: 6 0
+          Complexity of rule ~childhood.0.0- t: 1
+        rule: ~childhood.0.1 a:  9
+          line: 9 0
+          Complexity of rule ~childhood.0.1- a: 1
+        rule: ~childhood.0.2 a:  12
+          line: 12 0
+          Complexity of rule ~childhood.0.2- a: 1
+        rule: ~childhood.1.0-RUNAWAY t:  14
+          line: 14 0
+          Complexity of rule ~childhood.1.0-RUNAWAY t: 1
+        rule: ~childhood.2.0- t:  16
+          line: 16 0
+          Complexity of rule ~childhood.2.0- t: 1
+        rule: ~childhood.2.1 a:  19
+          line: 19 0
+          Complexity of rule ~childhood.2.1- a: 1
+        rule: ~childhood.2.2 a:  22
+          line: 22 0
+          Complexity of rule ~childhood.2.2- a: 1
+        rule: ~childhood.2.3 a:  25
+          line: 25 0
+          Complexity of rule ~childhood.2.3- a: 1
+        rule: ~childhood.2.4 a:  28
+          line: 28 0
+          Complexity of rule ~childhood.2.4- a: 1
+        rule: ~childhood.2.5 a:  31
+          line: 31 0
+          Complexity of rule ~childhood.2.5- a: 1
+        rule: ~childhood.2.6 a:  34
+          line: 34 0
+          Complexity of rule ~childhood.2.6- a: 1
+        rule: ~childhood.2.7 a:  37
+          line: 37 0
+          Complexity of rule ~childhood.2.7- a: 1
+        rule: ~childhood.2.8 a:  40
+          line: 40 0
+          Complexity of rule ~childhood.2.8- a: 1
+        rule: ~childhood.2.9 b:  43
+          line: 43 0
+          Complexity of rule ~childhood.2.9- b: 1
+        rule: ~childhood.2.10 b:  46
+          line: 46 0
+          Complexity of rule ~childhood.2.10- b: 1
+        rule: ~childhood.3.0-SCARE t:  48
+          line: 48 0
+          Complexity of rule ~childhood.3.0-SCARE t: 1
+        rule: ~childhood.4.0- t:  50
+          line: 50 0
+          Complexity of rule ~childhood.4.0- t: 1
+        rule: ~childhood.5.0 u:  53
+          line: 53 0
+          Complexity of rule ~childhood.5.0- u: 1
+        rule: ~childhood.6.0-HAPPY u:  56
+          line: 56 0
+          Complexity of rule ~childhood.6.0-HAPPY u: 1
+        rule: ~childhood.7.0 u:  59
+          line: 59 0
+          Complexity of rule ~childhood.7.0- u: 1
+        rule: ~childhood.8.0 u:  62
+          line: 62 0
+          Complexity of rule ~childhood.8.0- u: 1
+        rule: ~childhood.9.0 u:  65
+          line: 65 0
+          Complexity of rule ~childhood.9.0- u: 1
+        rule: ~childhood.10.0 u:  68
+          line: 68 0
+          line: 70 46
+          Complexity of rule ~childhood.10.0- u: 1
+file: C:/Users/anscr/Desktop/SoftBotProject/ChatScript/../Jarvis/introductions.top 0
+    topic: ~introductions 2
+        rule: ~introductions.0.0 t:  5
+          line: 6 0
+          line: 7 10
+          Complexity of rule ~introductions.0.0- t: 1
+        rule: ~introductions.1.0 t:  10
+          line: 11 0
+          line: 12 10
+          Complexity of rule ~introductions.1.0- t: 1
+        rule: ~introductions.2.0- t:  15
+          line: 15 0
+          Complexity of rule ~introductions.2.0- t: 1
+        rule: ~introductions.2.1 a:  17
+          line: 17 0
+          Complexity of rule ~introductions.2.1- a: 1
+        rule: ~introductions.2.2 a:  19
+          line: 19 0
+          Complexity of rule ~introductions.2.2- a: 1
+        rule: ~introductions.3.0 u:  22
+          line: 22 0
+          line: 23 21
+          Complexity of rule ~introductions.3.0- u: 1
+file: C:/Users/anscr/Desktop/SoftBotProject/ChatScript/../Jarvis/keywordless.top 0
+    topic: ~keywordless 4
+        rule: ~keywordless.0.0 u:  6
+          line: 6 0
+          Complexity of rule ~keywordless.0.0- u: 1
+        rule: ~keywordless.1.0 ?:  9
+          line: 9 0
+          Complexity of rule ~keywordless.1.0- ?: 1
+        rule: ~keywordless.2.0 u:  13
+          line: 13 0
+          Complexity of rule ~keywordless.2.0- u: 1
+        rule: ~keywordless.3.0 ?:  17
+          line: 17 0
+          line: 18 18
+          line: 20 30
+          line: 21 192
+          line: 24 347
+          Complexity of rule ~keywordless.3.0- ?: 1
+        rule: ~keywordless.4.0 ?:  30
+          line: 30 0
+          line: 31 10
+          line: 37 55
+          line: 38 63
+          line: 39 225
+          line: 42 380
+          line: 44 419
+          Complexity of rule ~keywordless.4.0- ?: 1
+file: C:/Users/anscr/Desktop/SoftBotProject/ChatScript/../Jarvis/simplecontrol.top 0
+    macro: ^jarvis 2
+          line: 3 0
+          line: 5 54
+          line: 6 89
+          line: 8 108
+          line: 9 131
+          line: 10 156
+          Complexity of ^jarvis: 1
+          line: 14 0
+    topic: ~control 18
+        rule: ~control.0.0 u:  21
+          line: 22 0
+          Complexity of rule ~control.0.0- u: 1
+        rule: ~control.1.0 u:  24
+          line: 24 0
+          Complexity of rule ~control.1.0- u: 1
+        rule: ~control.2.0 u:  25
+          line: 25 0
+          Complexity of rule ~control.2.0- u: 1
+        rule: ~control.3.0 u:  27
+          line: 27 0
+          Complexity of rule ~control.3.0- u: 1
+        rule: ~control.4.0 u:  28
+          line: 28 0
+          Complexity of rule ~control.4.0- u: 1
+        rule: ~control.5.0 u:  29
+          line: 29 0
+          Complexity of rule ~control.5.0- u: 1
+        rule: ~control.6.0 u:  30
+          line: 30 0
+          Complexity of rule ~control.6.0- u: 1
+        rule: ~control.7.0 u:  31
+          line: 31 0
+          Complexity of rule ~control.7.0- u: 1
+        rule: ~control.8.0 u:  32
+          line: 32 0
+          Complexity of rule ~control.8.0- u: 1
+        rule: ~control.9.0 u:  34
+          line: 35 0
+          line: 36 18
+          line: 38 80
+          line: 40 103
+          line: 42 188
+          line: 44 254
+          line: 47 301
+          line: 49 398
+          line: 51 447
+          line: 52 473
+          line: 54 490
+          line: 55 523
+          line: 56 562
+          line: 58 605
+          line: 60 621
+          line: 61 627
+          line: 64 629
+          line: 66 678
+          line: 72 724
+          line: 74 788
+          line: 78 834
+          line: 80 888
+          line: 84 905
+          line: 86 1032
+          line: 88 1081
+          line: 89 1107
+          line: 91 1124
+          line: 92 1157
+          line: 93 1195
+          line: 95 1238
+          line: 97 1254
+          line: 98 1260
+          line: 99 1262
+          line: 101 1358
+          line: 103 1407
+          line: 104 1432
+          line: 106 1449
+          line: 107 1481
+          line: 108 1519
+          line: 110 1562
+          line: 112 1578
+          line: 113 1584
+          line: 115 1586
+          line: 117 1635
+          line: 118 1649
+          line: 119 1670
+          Complexity of rule ~control.9.0- u: 17
+    topic: ~xpostprocess 122
+        rule: ~xpostprocess.0.0 t:  124
+          line: 125 0
+          line: 127 17
+          line: 128 47
+          line: 130 104
+          line: 131 114
+          line: 133 155
+          line: 135 214
+          line: 137 261
+          line: 138 267
+          Complexity of rule ~xpostprocess.0.0- t: 3

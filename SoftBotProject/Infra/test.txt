@@ -1,0 +1,5 @@
+:prepare 내가 제일 잘 나가 들어 봤어요?
+
+:testpattern (좋아 * 음악*) 좋아하는 노래 있어요?
+
+:verify ~kpop keyword
