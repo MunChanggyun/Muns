@@ -1,1 +1,128 @@
-﻿+ defaultbot 
+﻿+ fan NOUN_PROPER_SINGULAR 
++ Real NOUN_PROPER_SINGULAR 
++ 선수 NOUN_PROPER_SINGULAR PATTERN_WORD 
++ 레알마드리드 NOUN NOUN_PROPER_SINGULAR 
++ 레알 NOUN NOUN_PROPER_SINGULAR 
++ RealMardrid NOUN_PROPER_SINGULAR 
++ 마드리드 NOUN NOUN_PROPER_SINGULAR 
++ 바르셀로나 NOUN NOUN_PROPER_SINGULAR 
++ 바르샤 NOUN NOUN_PROPER_SINGULAR 
++ Barelona NOUN_PROPER_SINGULAR 
++ 맨유 NOUN NOUN_PROPER_SINGULAR 
++ 맨체스터유나이티드 NOUN NOUN_PROPER_SINGULAR 
++ Manchaster NOUN_PROPER_SINGULAR 
++ MU NOUN_PROPER_SINGULAR 
++ 플레이어 NOUN NOUN_PROPER_SINGULAR 
++ 축구선수 NOUN NOUN_PROPER_SINGULAR 
++ 팬 NOUN NOUN_PROPER_SINGULAR 
++ 축구 NOUN 
++ 풋볼 NOUN 
++ 는 
++ 마드리드는 
++ 레알는 
++ 레알마드리드는 
++ 를 
++ 마드리드를 
++ 레알를 
++ 레알마드리드를 
++ 가 
++ 마드리드가 
++ 레알가 
++ 레알마드리드가 
++ 의 
++ 마드리드의 
++ 레알의 
++ 레알마드리드의 
++ 에 
++ 마드리드에 
++ 레알에 
++ 레알마드리드에 
++ 도 
++ 마드리드도 
++ 레알도 
++ 레알마드리드도 
++ 바르샤가 
++ 바르셀로나가 
++ 바르샤는 
++ 바르셀로나는 
++ 바르샤를 
++ 바르셀로나를 
++ 바르샤의 
++ 바르셀로나의 
++ 바르샤에 
++ 바르셀로나에 
++ 바르샤도 
++ 바르셀로나도 
++ 맨체스터유나이티드는 
++ 맨유는 
++ 맨체스터유나이티드를 
++ 맨유를 
++ 맨체스터유나이티드가 
++ 맨유가 
++ 맨체스터유나이티드의 
++ 맨유의 
++ 맨체스터유나이티드에 
++ 맨유에 
++ 맨체스터유나이티드도 
++ 맨유도 
++ football는 
++ soccer는 
++ 풋볼는 
++ 축구는 
++ football를 
++ soccer를 
++ 풋볼를 
++ 축구를 
++ football가 
++ soccer가 
++ 풋볼가 
++ 축구가 
++ football의 
++ soccer의 
++ 풋볼의 
++ 축구의 
++ football에 
++ soccer에 
++ 풋볼에 
++ 축구에 
++ football도 
++ soccer도 
++ 풋볼도 
++ 축구도 
++ fan는 
++ 팬는 
++ player는 
++ 축구선수는 
++ 플레이어는 
++ 선수는 
++ fan를 
++ 팬를 
++ player를 
++ 축구선수를 
++ 플레이어를 
++ 선수를 
++ fan가 
++ 팬가 
++ player가 
++ 축구선수가 
++ 플레이어가 
++ 선수가 
++ fan의 
++ 팬의 
++ player의 
++ 축구선수의 
++ 플레이어의 
++ 선수의 
++ fan에 
++ 팬에 
++ player에 
++ 축구선수에 
++ 플레이어에 
++ 선수에 
++ fan도 
++ 팬도 
++ player도 
++ 축구선수도 
++ 플레이어도 
++ 선수도 
++ defaultbot 

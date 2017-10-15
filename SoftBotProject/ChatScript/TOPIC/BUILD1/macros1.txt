@@ -1,1 +1,3 @@
-﻿^jarvis o 0 0 A( ) $cs_token = 4096 | 255 | 512 | 131072 | 1024 | 2048 | 24576 ^addtopic ( ~introductions ) $cs_control_main = ~control $userprompt = ^"%user: >" $botprompt = ^"Jarvis: " $singleresponse = 1 `
+﻿^nounpluspp t 0 0 C( ^origin ^pp ) ^loop ( -1 ) 01F { $$element = ^iterator ( ? member ^0 ) $$tmp = ^join ( $$element ^1 ) ^createfact ( $$tmp member $$element ) } `
+^addelement t 0 0 C( ^dics ^origin ) ^loop ( -1 ) 01+ { $$element = ^iterator ( ? member ^1 ) ^query ( ? member $$element ) ^createfact ( @0subject member ^0 ) ^createfact ( @0subject member ^1 ) } `
+^jarvis o 0 0 A( ) $cs_token = 4096 | 255 | 512 | 131072 | 1024 | 2048 | 24576 ^addtopic ( ~introductions ) $cs_control_main = ~control $userprompt = ^"%user: >" $botprompt = ^"Jarvis: " $singleresponse = 1 `

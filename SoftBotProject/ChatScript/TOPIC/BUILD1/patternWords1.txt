@@ -1,4 +1,5 @@
 ﻿boogie_man
+선수
 loopback
 direct_v
 chatoutput

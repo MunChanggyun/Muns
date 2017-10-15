@@ -1,0 +1,57 @@
+concept: ~레알마드리드사전 NOUN_PROPER_SINGULAR [ 레알마드리드 레알 RealMardrid Real 마드리드 ]
+concept: ~바르셀로나사전 NOUN_PROPER_SINGULAR [ 바르셀로나 바르샤 Barelona ]
+concept: ~맨유사전 NOUN_PROPER_SINGULAR [ 맨유 맨체스터유나이티드 Manchaster MU ]
+concept: ~선수사전 NOUN_PROPER_SINGULAR [ 선수 플레이어 축구선수 player 팬 fan ]
+concept: ~축구사전 NOUN [ 축구 풋볼 soccer football ]
+
+concept: ~레알마드리드 [ 레알마드리드 레알 마드리드 RealMardrid Real ]
+concept: ~바르셀로나 [ 바르셀로나 바르샤 Barcelona ]
+concept: ~맨유 [ 맨유 맨체스터유나이티드 Manchaseter MU ]
+concept: ~축구 [ 축구 풋볼 soccer football ]
+concept: ~선수 [ 선수 플레이어 축구선수 player 팬 fan ]
+
+Tablemacro: ^NounPlusPP(^Origin ^pp)
+{
+	loop()
+	{
+		$$element = ^iterator(? member ^Origin)
+		$$tmp = join($$element ^pp)
+		^CreateFact($$tmp member $$element)
+	}
+}
+
+Tablemacro: ^addElement(^Dics ^Origin)
+{
+	loop()
+	{
+		$$element = ^iterator(? member ^Origin)
+		^query(? member $$element)
+		^CreateFact(@0subject member ^Dics)
+		^CreateFact(@0subject member ^Origin)
+	}
+}
+
+table: ^NounPlusPP(~레알마드리드)
+는 를 가 의 에 도 
+table: ^addElement(~레알마드리드사전)
+~레알마드리드
+
+table: ^NounPlusPP(~바르셀로나)
+가 는 를 가 의 에 도 
+table: ^addElement(~바르셀로나사전)
+~바르셀로나
+
+table: ^NounPlusPP(~맨유)
+는 를 가 의 에 도 
+table: ^addElement(~맨유사전)
+~맨유
+
+table: ^NounPlusPP(~축구)
+는 를 가 의 에 도 
+table: ^addElement(~축구사전)
+~축구
+
+table: ^NounPlusPP(~선수)
+는 를 가 의 에 도 
+table: ^addElement(~선수사전)
+~선수

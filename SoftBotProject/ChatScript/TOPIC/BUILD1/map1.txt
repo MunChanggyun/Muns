@@ -1,4 +1,4 @@
-﻿file: C:/Users/anscr/Desktop/SoftBotProject/ChatScript/../Jarvis/childhood.top 0
+﻿file: C:/Users/anscr/Desktop/muns/SoftBotProject/ChatScript/../Jarvis/childhood.top 0
     topic: ~childhood 2
         rule: ~childhood.0.0- t:  6
           line: 6 0
@@ -70,7 +70,54 @@
           line: 68 0
           line: 70 46
           Complexity of rule ~childhood.10.0- u: 1
-file: C:/Users/anscr/Desktop/SoftBotProject/ChatScript/../Jarvis/introductions.top 0
+file: C:/Users/anscr/Desktop/muns/SoftBotProject/ChatScript/../Jarvis/football.top 0
+    topic: ~football 1
+        rule: ~football.0.0-FootballIntro t:  3
+          line: 3 0
+          Complexity of rule ~football.0.0-FOOTBALLINTRO t: 1
+        rule: ~football.1.0-FaveFootball t:  4
+          line: 4 0
+          Complexity of rule ~football.1.0-FAVEFOOTBALL t: 1
+        rule: ~football.2.0-WatchFootball t:  5
+          line: 5 0
+          Complexity of rule ~football.2.0-WATCHFOOTBALL t: 1
+        rule: ~football.3.0 ?:  8
+          line: 8 0
+          Complexity of rule ~football.3.0- ?: 1
+        rule: ~football.4.0 ?:  11
+          line: 11 0
+          Complexity of rule ~football.4.0- ?: 1
+        rule: ~football.5.0 ?:  14
+          line: 14 0
+          Complexity of rule ~football.5.0- ?: 1
+        rule: ~football.6.0 ?:  17
+          line: 17 0
+          Complexity of rule ~football.6.0- ?: 1
+file: C:/Users/anscr/Desktop/muns/SoftBotProject/ChatScript/../Jarvis/footballconcept.top 0
+    concept: ~레알마드리드사전 1
+    concept: ~바르셀로나사전 2
+    concept: ~맨유사전 3
+    concept: ~선수사전 4
+    concept: ~축구사전 5
+    concept: ~레알마드리드 7
+    concept: ~바르셀로나 8
+    concept: ~맨유 9
+    concept: ~축구 10
+    concept: ~선수 11
+    macro: ^nounpluspp 13
+          line: 15 0
+          line: 17 17
+          line: 18 57
+          line: 19 88
+          Complexity of ^nounpluspp: 1
+    macro: ^addelement 23
+          line: 25 0
+          line: 27 17
+          line: 28 57
+          line: 29 87
+          line: 30 123
+          Complexity of ^addelement: 1
+file: C:/Users/anscr/Desktop/muns/SoftBotProject/ChatScript/../Jarvis/introductions.top 0
     topic: ~introductions 2
         rule: ~introductions.0.0 t:  5
           line: 6 0
@@ -93,7 +140,7 @@ file: C:/Users/anscr/Desktop/SoftBotProject/ChatScript/../Jarvis/introductions.t
           line: 22 0
           line: 23 21
           Complexity of rule ~introductions.3.0- u: 1
-file: C:/Users/anscr/Desktop/SoftBotProject/ChatScript/../Jarvis/keywordless.top 0
+file: C:/Users/anscr/Desktop/muns/SoftBotProject/ChatScript/../Jarvis/keywordless.top 0
     topic: ~keywordless 4
         rule: ~keywordless.0.0 u:  6
           line: 6 0
@@ -120,7 +167,7 @@ file: C:/Users/anscr/Desktop/SoftBotProject/ChatScript/../Jarvis/keywordless.top
           line: 42 380
           line: 44 419
           Complexity of rule ~keywordless.4.0- ?: 1
-file: C:/Users/anscr/Desktop/SoftBotProject/ChatScript/../Jarvis/simplecontrol.top 0
+file: C:/Users/anscr/Desktop/muns/SoftBotProject/ChatScript/../Jarvis/simplecontrol.top 0
     macro: ^jarvis 2
           line: 3 0
           line: 5 54
