@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Chat</title>
+    <style>
+    </style>
+  </head>
+  <body>
+    <!--전체 wrap-->
+    <div>
+      <div type="text" id="login_User" ><%= user%></div>
+      <table>
+        <tr>
+          <th>새로운 채티방 <input type="text" id="inputRoomName" placeholder="방 이름을 입력해 주세요"></th>
+          <th><button type="button" id="makeRoom">만들기</button></th>
+        </tr>
+      </table>
+      <table id="roomInfo">
+      </table>
+    </div>
+    <script src="//code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      $(document).ready(function(){
+        var user = $("#login_User").text();
+        //초기 채팅방 리스트 불러오기
+        var url = "http://localhost:3000/chatroom/chatrooms";
+
+        sendAjax(url);
+
+        //새로운 방 만들기
+        $("#makeRoom").on("click", function(){
+          var roomName = $("#inputRoomName").val();
+          var url = "http://localhost:3000/chatroom/makeRoom";
+          param = {"roomName" : roomName, "user" : user};
+          sendAjax(url, param);
+        });
+
+        function sendAjax(url, data){
+          var oThis = this;
+
+          if(data != "" || data != null){
+            data = JSON.stringify(data);
+          }
+
+          var xhr = new XMLHttpRequest();
+          xhr.open("post",url );
+          xhr.setRequestHeader("Content-type","application/json");
+          xhr.send(data);
+          xhr.addEventListener("load", function(){
+            var result = JSON.parse(xhr.responseText);
+            if(result.state == "success"){
+              var rows = result.rows ? result.rows : result.msg;
+
+              //채팅반 만들어진 경우
+              if(result.roomIdx > 0){
+                var rUrl = "http://localhost:3000/chatroom/chatrooms";
+                sendAjax(rUrl);
+              }
+
+              if(url == "http://localhost:3000/chatroom/chatrooms"){
+                var bodyStr = "";
+                var user = $("#login_User").text();
+               
+                $("#roomInfo").empty();
+
+                bodyStr += "<tr>";
+                bodyStr +=  "<th>방제목</th>"
+                bodyStr +=  "<th>채팅방 대화 상대</th>"
+                bodyStr += "</tr>";
+                if(typeof(rows) == "object"){
+                  for(var i = 0; i < rows.length ; i++){
+                  bodyStr += "<tr style=\"text-align : center;\" >";
+                  bodyStr +=    "<td>" + rows[i].room_name + "</td>";
+                  bodyStr +=    "<td>";
+                  // bodyStr +=      "<input type=\"button\" onclick=\"" + enterRoom()+ ";\" value=\"입장하기\">";
+                   bodyStr +=      "<input type=\"button\" onclick=\"enterRoom('" + rows[i].room_id + "','" + user + "');\" value=\"입장하기\">";
+                  bodyStr +=    "</td>";
+                  bodyStr += "</tr>";
+                  }
+                }
+               
+
+                $("#roomInfo").append(bodyStr);
+              }
+
+
+            }else{
+            } 
+          });
+        }
+
+        
+
+      });
+      //채팅방 입장하기
+      function enterRoom(roomIdx, user){
+          //방 입장하기
+          var url = "http://localhost:3000/chatroom/chat";
+          var params = {"room" : roomIdx, "user_id" : user};
+          
+          if(params){
+            params = JSON.stringify(params);
+          }
+
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", url);
+          xhr.setRequestHeader("Content-type", "application/json");
+          xhr.send(params);
+          xhr.addEventListener("load", function(){
+            //var form = $("<form></form>");
+            var result = JSON.parse(xhr.responseText);
+            if(result.result > 0){
+              var form = document.createElement("form");
+              form.method = "POST";
+              form.action = "http://localhost:3000/chatting";
+              
+              var inputRoom = document.createElement("input");
+              inputRoom.type = "TEXT";
+              inputRoom.name = "room";
+              inputRoom.value = roomIdx;
+              form.appendChild(inputRoom);
+
+              var inputName = document.createElement("input");
+              inputName.type = "TEXT";
+              inputName.name = "user_id";
+              inputName.value = user;
+              form.appendChild(inputName);
+              // form.attr("action", "http://localhost:3000/chatting");
+              // form.attr("method", "POST");
+              document.body.appendChild(form);
+              form.submit();
+            }
+          });
+        }
+    </script>
+  </body>
+</html>
