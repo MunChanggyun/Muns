@@ -1,0 +1,11 @@
+웹 프레임 워크 : koa
+router : koa-router
+JSON parser : koa-bodyparser
+parameter 검증 : Joi
+DB: mongodb
+DB Lib : mongoose
+DB env : dotenv
+hash, hash check : bcrypt
+import :  esm
+auth token: jwt
+JWT_TOKEN: jsonwebtoken
