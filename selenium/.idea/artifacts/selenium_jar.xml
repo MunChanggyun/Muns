@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="selenium:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/selenium_jar</output-path>
+    <root id="archive" name="selenium.jar">
+      <element id="module-output" name="selenium" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/quartz-2.3.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/selenium-java-4.1.2.zip" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/selenium-server-4.1.2.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
